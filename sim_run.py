@@ -33,38 +33,38 @@ settings = [
      lambda w, ws, blocks: [mp.Block(size=mp.Vector3(mp.inf, w, h), center=mp.Vector3(),  material=Simulation.Si), 
                             mp.Block(size=mp.Vector3(mp.inf, mp.inf, 0.5*sc_z-0.5*h),center=mp.Vector3(0,0,0.25*sc_z+0.25*h), material=Simulation.SiO2)]),
     
-    ("S2", 2, np.linspace(0.1, 1.4, 53), np.linspace(0.02, 0.98, 33),
+    ("S2", 2, np.linspace(0.1, 0.91, 28),np.linspace(0.02, 0.98, 25),
      lambda w, ws, blocks: [ *[mp.Block(size=mp.Vector3(mp.inf, w, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w /2, 0), 
                                         material=Simulation.Si) for x in range(blocks)] ]),
-    ("S2+SiO2_b", 2, np.linspace(0.1, 1.4, 53), np.linspace(0.02, 0.98, 33),
+    ("S2+SiO2_b", 2, np.linspace(0.1, 0.91, 28),np.linspace(0.02, 0.98, 25),
      lambda w, ws, blocks: [ *[mp.Block(size=mp.Vector3(mp.inf, w, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w / 2, 0), 
                                         material=Simulation.Si) for x in range(blocks)],
                             mp.Block(size=mp.Vector3(mp.inf, mp.inf, 0.5*sc_z-0.5*h),center=mp.Vector3(0,0,0.25*sc_z+0.25*h), material=Simulation.SiO2)]),
-    ("S2+SiO2_m", 2, np.linspace(0.1, 1.4, 53), np.linspace(0.02, 0.98, 33),
+    ("S2+SiO2_m", 2, np.linspace(0.1, 0.91, 28),np.linspace(0.02, 0.98, 25),
      lambda w, ws, blocks: [ *[mp.Block(size=mp.Vector3(mp.inf, w, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w / 2, 0), 
                                         material=Simulation.Si) for x in range(blocks)],
                             *[mp.Block(size=mp.Vector3(mp.inf, ws, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w + ws / 2, 0), 
                                        material=Simulation.SiO2) for x in range(blocks - 1)] ]),
-    ("S2+SiO2_bm", 2, np.linspace(0.1, 1.4, 53), np.linspace(0.02, 0.98, 33),
+    ("S2+SiO2_bm", 2, np.linspace(0.1, 0.91, 28),np.linspace(0.02, 0.98, 25),
      lambda w, ws, blocks: [ *[mp.Block(size=mp.Vector3(mp.inf, w, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w / 2, 0), 
                                         material=Simulation.Si) for x in range(blocks)],
                             *[mp.Block(size=mp.Vector3(mp.inf, ws, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w + ws / 2, 0), 
                                        material=Simulation.SiO2) for x in range(blocks - 1)],
                             mp.Block(size=mp.Vector3(mp.inf, mp.inf, 0.5*sc_z-0.5*h),center=mp.Vector3(0,0,0.25*sc_z+0.25*h), material=Simulation.SiO2)]),
     
-    ("S3", 3, np.linspace(0.1, 1.0, 37), np.linspace(0.02, 0.47, 16),
+    ("S3", 3, np.linspace(0.1, 0.91, 28), np.linspace(0.02, 0.47, 16),
      lambda w, ws, blocks: [ *[mp.Block(size=mp.Vector3(mp.inf, w, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w /2, 0), 
                                         material=Simulation.Si) for x in range(blocks)] ]),
-    ("S3+SiO2_b", 3, np.linspace(0.1, 1.0, 37), np.linspace(0.02, 0.47, 16),
+    ("S3+SiO2_b", 3, np.linspace(0.1, 0.91, 28), np.linspace(0.02, 0.47, 16),
      lambda w, ws, blocks: [ *[mp.Block(size=mp.Vector3(mp.inf, w, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w / 2, 0), 
                                         material=Simulation.Si) for x in range(blocks)],
                             mp.Block(size=mp.Vector3(mp.inf, mp.inf, 0.5*sc_z-0.5*h),center=mp.Vector3(0,0,0.25*sc_z+0.25*h), material=Simulation.SiO2)]),
-    ("S3+SiO2_m", 3, np.linspace(0.1, 1.0, 37), np.linspace(0.02, 0.47, 16),
+    ("S3+SiO2_m", 3, np.linspace(0.1, 0.91, 28), np.linspace(0.02, 0.47, 16),
      lambda w, ws, blocks: [ *[mp.Block(size=mp.Vector3(mp.inf, w, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w / 2, 0), 
                                         material=Simulation.Si) for x in range(blocks)],
                             *[mp.Block(size=mp.Vector3(mp.inf, ws, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w + ws / 2, 0), 
                                        material=Simulation.SiO2) for x in range(blocks - 1)] ]),
-    ("S3+SiO2_bm", 3, np.linspace(0.1, 1.0, 37), np.linspace(0.02, 0.47, 16),
+    ("S3+SiO2_bm", 3, np.linspace(0.1, 0.91, 28), np.linspace(0.02, 0.47, 16),
      lambda w, ws, blocks: [ *[mp.Block(size=mp.Vector3(mp.inf, w, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w / 2, 0), 
                                         material=Simulation.Si) for x in range(blocks)],
                             *[mp.Block(size=mp.Vector3(mp.inf, ws, h), center=mp.Vector3(0, 0 - (blocks * w + (blocks - 1) * ws) / 2 + x * (w + ws) + w + ws / 2, 0), 
@@ -119,7 +119,7 @@ def simulation_execute(setting, spinner=None):
 
 from halo import Halo
 with Halo(text='Simulating', spinner='dots') as spinner:
-    for i, setting in enumerate(settings):
+    for i, setting in enumerate(settings[1:]):
         spinner.info(f"Simulating {setting[0]} ...")
         simulation_execute(setting, spinner)
                         
