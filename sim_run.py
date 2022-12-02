@@ -53,10 +53,10 @@ settings = [
     ("S2_m", 2, np.linspace(0.06, 0.99, 32), np.linspace(0.06, 0.99, 32), multiblock_m_geometry),
     
     ("S3", 3, np.linspace(0.06, 0.84, 27), np.linspace(0.06, 0.48, 15), multiblock_geometry),
-    ("S3+m", 3, np.linspace(0.06, 0.84, 27), np.linspace(0.06, 0.48, 15), multiblock_m_geometry),
+    ("S3_m", 3, np.linspace(0.06, 0.84, 27), np.linspace(0.06, 0.48, 15), multiblock_m_geometry),
     
     ("S4", 4, np.linspace(0.06, 0.75, 24), np.linspace(0.06, 0.39, 12), multiblock_geometry),
-    ("S4+m", 4, np.linspace(0.06, 0.75, 24), np.linspace(0.06, 0.39, 12), multiblock_m_geometry)
+    ("S4_m", 4, np.linspace(0.06, 0.75, 24), np.linspace(0.06, 0.39, 12), multiblock_m_geometry)
 ]
 
 # %% [markdown]
