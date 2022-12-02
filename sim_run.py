@@ -71,6 +71,8 @@ def get_path(name):
     return f"./data/sim_{name}.npy"
 
 def simulation_execute(setting, spinner=None):
+    # get the start time
+    st = time.time()
     sim = Simulation(sc_y=sc_y, sc_z=sc_z)
     (setting_name, blocks, w_range, ws_range, geometry_lambda) = setting
     neffs = np.zeros([len(w_range), len(ws_range), 2, 4])
@@ -79,7 +81,7 @@ def simulation_execute(setting, spinner=None):
     for w_i, w in enumerate(w_range):
         for ws_i, ws in enumerate(ws_range):
             curr += 1
-            print(f"Progress {curr} / {total} iterations ...", end="")
+            print(f"Progress {curr} / {total} iterations ...time: {time.time() - st:0.6f}s", end="")
             sys.stdout.flush()
             geometry = geometry_lambda(w, ws, blocks)
             sim.init_mode_solver(geometry, default_material=Simulation.PC1)
@@ -94,6 +96,9 @@ def simulation_execute(setting, spinner=None):
     np.save(path, neffs)
     if spinner: 
         spinner.succeed(f"Finished simulation with setting {setting_name}, saved to {path}")
+    
+    # get the execution time
+    print(f'Execution time: {time.time() - st:0.6f} seconds')
 
 from halo import Halo
 with Halo(text='Simulating', spinner='dots') as spinner:
