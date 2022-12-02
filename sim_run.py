@@ -99,7 +99,7 @@ def simulation_execute(setting, spinner=None):
 
 from halo import Halo
 with Halo(text='Simulating', spinner='dots') as spinner:
-    for i, setting in enumerate(settings[0:]):
+    for i, setting in enumerate(settings[start:]):
         spinner.info(f"Simulating {i}. {setting[0]} ...")
         simulation_execute(setting, spinner)
                         
