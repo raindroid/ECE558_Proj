@@ -63,7 +63,7 @@ settings = [
 # ### Execute the settings
 
 # %%
-import sys
+import sys, os
 print('Starting simulation with setting index', sys.argv[1])
 start = int(sys.argv[1]) if sys.argv[1] and int(sys.argv[1]) >= 0 else 0
 
@@ -81,7 +81,7 @@ def simulation_execute(setting, spinner=None):
     for w_i, w in enumerate(w_range):
         for ws_i, ws in enumerate(ws_range):
             curr += 1
-            print(f"Progress {curr} / {total} iterations ...time: {time.time() - st:0.1f}s", end="")
+            print(f"\rProgress {curr} / {total} iterations ... time: {time.time() - st:0.1f}s", end="")
             sys.stdout.flush()
             geometry = geometry_lambda(w, ws, blocks)
             sim.init_mode_solver(geometry, default_material=Simulation.PC1)
@@ -96,9 +96,6 @@ def simulation_execute(setting, spinner=None):
     np.save(path, neffs)
     if spinner: 
         spinner.succeed(f"Finished simulation with setting {setting_name}, saved to {path}")
-    
-    # get the execution time
-    print(f'Execution time: {time.time() - st:0.1f} seconds')
 
 from halo import Halo
 with Halo(text='Simulating', spinner='dots') as spinner:
