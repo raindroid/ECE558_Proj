@@ -66,7 +66,7 @@ class Simulation(object):
             self.ms = ms
         return ms
 
-    def plot(self, figsize=(6,4), dpi=100, cmap='gray_r'):
+    def plot(self, figsize=(6,4), dpi=100, cmap='Blues'):
         assert self.ms, "Geometry not setup properly"
         
         with io.capture_output() as _:
@@ -81,12 +81,13 @@ class Simulation(object):
                         extent=[-self.supercell.w/2,self.supercell.w/2,
                                 -self.supercell.h/2,self.supercell.h/2] )
         cbar = fig.colorbar(pos, ax=ax)
+        
         cbar.set_label('n')
         ax.set_xlabel('y')
         ax.set_ylabel('z')
         plt.show()
         
-    def E_field(self, geometry, sources=None, default_material=mp.Medium(index=1.552), amplitude=1.0, component=mp.Ey,
+    def sim_E_field(self, geometry, sources=None, default_material=mp.Medium(index=1.552), amplitude=1.0, component=mp.Ey,
                 store_path="./data/ey.npy", cell_x=0):
         cell = mp.Vector3(cell_x, self.supercell.w, self.supercell.h) # just work in 2D for this
         freq = 1 / self.wl
@@ -112,9 +113,7 @@ class Simulation(object):
         sim.init_sim()
         sim.solve_cw()
         
-        E = np.abs(np.array(sim.get_array(mp.Ez)))
-        np.save(store_path, E)
-        return E
+        return sim
     
     def run(self):
         f_mode = 1/self.wl   # frequency corresponding to desired wavelength (in um) 
