@@ -85,6 +85,36 @@ class Simulation(object):
         ax.set_xlabel('y')
         ax.set_ylabel('z')
         plt.show()
+        
+    def E_field(self, geometry, sources=None, default_material=mp.Medium(index=1.552), amplitude=1.0, component=mp.Ey,
+                store_path="./data/ey.npy", cell_x=0):
+        cell = mp.Vector3(cell_x, self.supercell.w, self.supercell.h) # just work in 2D for this
+        freq = 1 / self.wl
+
+        sources = sources if sources is not None else [
+            mp.Source(src=mp.ContinuousSource(freq), center=mp.Vector3(x=0, y=0, z=0),
+                      component=component, amplitude=amplitude)] # 1mA source
+
+        # pml_layers = [mp.PML(1.0)]
+
+        sim = mp.Simulation(cell_size=cell,
+                            geometry=geometry,
+                            default_material=default_material,
+                            sources=sources,
+                            resolution=self.resolution,
+                            force_complex_fields=True)
+
+        # If we want to save the E-field z-components every 0.1 units of time,
+        # then, instead of the above, we can run:
+        # sim.run(mp.to_appended("ez", mp.at_every(0.1, mp.output_efield_z)),
+        #         until=35)
+
+        sim.init_sim()
+        sim.solve_cw()
+        
+        E = np.abs(np.array(sim.get_array(mp.Ez)))
+        np.save(store_path, E)
+        return E
     
     def run(self):
         f_mode = 1/self.wl   # frequency corresponding to desired wavelength (in um) 
