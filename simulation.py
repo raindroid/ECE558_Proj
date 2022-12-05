@@ -96,9 +96,10 @@ class Simulation(object):
             mp.Source(src=mp.ContinuousSource(freq), center=mp.Vector3(x=0, y=0, z=0),
                       component=component, amplitude=amplitude)] # 1mA source
 
-        # pml_layers = [mp.PML(1.0)]
+        pml_layers = [mp.PML(1.0)]
 
         sim = mp.Simulation(cell_size=cell,
+                            boundary_layers=pml_layers,
                             geometry=geometry,
                             default_material=default_material,
                             sources=sources,
