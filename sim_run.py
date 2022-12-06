@@ -46,17 +46,26 @@ multiblock_m_geometry = lambda w, ws, blocks: [ *[mp.Block(size=mp.Vector3(mp.in
                                                mp.Block(size=mp.Vector3(mp.inf, 0.5*sc_y-0.5*(blocks*w+blocks*ws-ws), mp.inf),center=mp.Vector3(0,-0.25*sc_y-0.25*(blocks*w+blocks*ws-ws),0), material=Simulation.SiO2),
                                                mp.Block(size=mp.Vector3(mp.inf, 0.5*sc_y-0.5*(blocks*w+blocks*ws-ws), mp.inf),center=mp.Vector3(0,0.25*sc_y+0.25*(blocks*w+blocks*ws-ws),0), material=Simulation.SiO2)]
 
+w2_range = np.linspace(0.06, 0.3, 25)
+ws2_range = np.linspace(0.06, 1.5, 73)
+
+w3_range = np.linspace(0.06, 0.3, 25)
+ws3_range = np.linspace(0.06, 1.2, 58)
+
+w4_range = np.linspace(0.06, 0.3, 25)
+ws4_range = np.linspace(0.06, 0.8, 38)
+
 settings = [
     ("S1", 1, np.linspace(0.06, 1.6, 78), [0], singleblock_geometry),
      
-    ("S2", 2, np.linspace(0.06, 0.99, 32), np.linspace(0.06, 0.99, 32), multiblock_geometry),
-    ("S2_m", 2, np.linspace(0.06, 0.99, 32), np.linspace(0.06, 0.99, 32), multiblock_m_geometry),
+    ("S2", 2, w2_range, ws2_range, multiblock_geometry),
+    ("S2_p", 2, w2_range, np.linspace(0.06, 0.40, 35), multiblock_m_geometry),
     
-    ("S3", 3, np.linspace(0.06, 0.84, 27), np.linspace(0.06, 0.48, 15), multiblock_geometry),
-    ("S3_m", 3, np.linspace(0.06, 0.84, 27), np.linspace(0.06, 0.48, 15), multiblock_m_geometry),
+    ("S3", 3, w3_range, ws3_range, multiblock_geometry),
+    ("S3_p", 3, w3_range, np.linspace(0.06, 0.35, 30), multiblock_m_geometry),
     
-    ("S4", 4, np.linspace(0.06, 0.75, 24), np.linspace(0.06, 0.39, 12), multiblock_geometry),
-    ("S4_m", 4, np.linspace(0.06, 0.75, 24), np.linspace(0.06, 0.39, 12), multiblock_m_geometry)
+    ("S4", 4, w4_range, ws4_range, multiblock_geometry),
+    ("S4_p", 4, w4_range, np.linspace(0.06, 0.35, 30), multiblock_m_geometry)
 ]
 
 # %% [markdown]
@@ -81,7 +90,7 @@ def simulation_execute(setting, spinner=None):
     for w_i, w in enumerate(w_range):
         for ws_i, ws in enumerate(ws_range):
             curr += 1
-            print(f"\rProgress {curr} / {total} iterations ... time: {time.time() - st:0.1f}s", end="")
+            print(f"Progress {curr} / {total} iterations ... time: {time.time() - st:0.1f}s")
             sys.stdout.flush()
             geometry = geometry_lambda(w, ws, blocks)
             sim.init_mode_solver(geometry, default_material=Simulation.PC1)
